@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2b31e60-1df9-45e4-a676-8fb8d225b529" name="Default Changelist" comment="Main push">
-      <change afterPath="$PROJECT_DIR$/.idea/description.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/project-template.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/databaseTesting/TestingDatabase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/displaying/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/Credentials.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/Publication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/Receipt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/accounts/AdministratorAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/accounts/NormalAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/categories/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/tools/Formatting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/tools/Validation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trabajo-practico-final2021.iml" afterDir="false" />
+    <list default="true" id="c2b31e60-1df9-45e4-a676-8fb8d225b529" name="Default Changelist" comment="Added most of the models.&#10;Added main menu (just display), and logging into the system (required for the mainMenu). &#10;Can't sign-up already, but working in progress.">
+      <change afterPath="$PROJECT_DIR$/src/com/company/tools/ConvertingTool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/displaying/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/displaying/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/models/Publication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Publication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/tools/Formatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/tools/Formatting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/tools/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/tools/Validation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,9 +105,10 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Main" />
       <module name="trabajo-practico-final2021" />
@@ -132,9 +119,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Java Scratch.Scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -154,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622592141969</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added most of the models.&#10;Added main menu (just display), and logging into the system (required for the mainMenu). &#10;Can't sign-up already, but working in progress.">
+      <created>1622661474476</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1622661474476</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,7 +185,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Main push" />
-    <option name="LAST_COMMIT_MESSAGE" value="Main push" />
+    <MESSAGE value="Added most of the models.&#10;Added main menu (just display), and logging into the system (required for the mainMenu). &#10;Can't sign-up already, but working in progress." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added most of the models.&#10;Added main menu (just display), and logging into the system (required for the mainMenu). &#10;Can't sign-up already, but working in progress." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -10,6 +10,6 @@ public class Main {
      */
     public static void main(String[] args) {
         TestingDatabase.Initializate();
-        MainMenu.Execute();
+        MainMenu.Start();
     }
 }

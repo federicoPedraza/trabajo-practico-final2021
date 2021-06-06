@@ -19,6 +19,7 @@ public abstract class Account {
     private Credentials credentials;
 
     private Cart cart;
+    private List<Receipt> receipts = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -35,6 +36,8 @@ public abstract class Account {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getUsername() { return credentials.getUsername(); }
 
     public boolean setCellNumber(String value)
     {
@@ -68,6 +71,8 @@ public abstract class Account {
         return cellNumber != null;
     }
 
+    public String getCellNumber() { return cellNumber;}
+
     public Cart getCart() {
         if(this.cart == null)
         {
@@ -83,8 +88,10 @@ public abstract class Account {
 
     public Account ()
     {
+        credentials = new Credentials("","","");
         accountCount++;
         setId();
+        receipts.clear();
         allAccounts.put(getId(), this);
     }
 
@@ -97,7 +104,10 @@ public abstract class Account {
         credentials = new Credentials(username, password, email);
         setId();
         allAccounts.put(getId(), this);
+        receipts.clear();
     }
+
+    public int transitionsAmount() { return receipts.size(); }
 
     public void setId()
     {
@@ -120,6 +130,11 @@ public abstract class Account {
         }
 
         return null;
+    }
+
+    public Credentials getCredentials()
+    {
+        return credentials;
     }
 
     public static void ListAllAccounts()

@@ -17,7 +17,7 @@ public class Publication {
     private LocalDate creationDate;
 
     private static int publicationCount = 0;
-    private HashMap<Integer, Publication> allPublications = new HashMap<Integer, Publication>();
+    private static HashMap<Integer, Publication> allPublications = new HashMap<Integer, Publication>();
 
     public Publication(String title, String description, int availableAmount, Account seller, double cost, Category[] categories) {
         id = publicationCount;
@@ -118,5 +118,15 @@ public class Publication {
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public static boolean exists(int id) {
+        return allPublications.containsKey(id);
+    }
+
+    @Override
+    public String toString()
+    {
+        return getTitle() + ". ";
     }
 }
