@@ -2,14 +2,11 @@ package com.company.models;
 
 import com.company.tools.Formatting;
 
-import java.text.Format;
-
 public class Receipt {
     public Account buyer;
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return
                 Formatting.horizontalLine() +
                         "Shopify!" +

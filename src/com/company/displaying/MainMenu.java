@@ -2,54 +2,48 @@ package com.company.displaying;
 
 import com.company.models.Account;
 import com.company.models.Publication;
+import com.company.models.accounts.AdministratorAccount;
 import com.company.models.accounts.NormalAccount;
-import com.company.models.categories.Category;
 import com.company.tools.ConvertingTool;
 import com.company.tools.Formatting;
 import com.company.tools.Validation;
 
-import java.sql.SQLOutput;
-import java.text.Format;
-import java.text.Normalizer;
 import java.util.Scanner;
 
 public class MainMenu {
     public static Account loggedAccount;
 
-    public static String logIn(String usernameOrEmail, String password)
-    {
+    public static String logIn(String usernameOrEmail, String password) {
         loggedAccount = Account.checkCredentials(usernameOrEmail, password);
-        if(loggedAccount == null) {
+        if (loggedAccount == null) {
             ExecuteLogInMenu("Invalid credentials. Please try again.");
         }
         return "";
     }
 
-    public static void ExecuteLogInMenu(String message)
-    {
+    public static void ExecuteLogInMenu(String message) {
+        loggedAccount = null;
         Formatting.clear();
         Formatting.drawHorizontalLine();
         //Account.ListAllAccounts(); //debugging propourses
-        if(message.length() > 0) System.out.println(message);
+        if (message.length() > 0) System.out.println(message);
         System.out.println("Do you need a new account? Please type 'Sign-up'");
         System.out.println("Please insert your username/email followed by the password.");
         Scanner scanner = new Scanner(System.in);
         String usernameOrEmail = scanner.next();
-        if(usernameOrEmail.equals("Sign-up"))
-        {
+        if (usernameOrEmail.equals("Sign-up")) {
             ExecuteSignUpMenu();
         }
         String password = scanner.next();
 
-        String logInStatus = logIn(usernameOrEmail,password);
-        if(!logInStatus.equals("")) {
+        String logInStatus = logIn(usernameOrEmail, password);
+        if (!logInStatus.equals("")) {
             System.out.println(logInStatus);
         }
     }
 
     //TODO: Finish sign-in up.
-    public static void ExecuteSignUpMenu()
-    {
+    public static void ExecuteSignUpMenu() {
 
         Account newAccount = new NormalAccount();
 
@@ -62,7 +56,7 @@ public class MainMenu {
 
         newAccount.setFirstName(Validation.scanForNumbers("Your first name can't contain any digit number or empty spaces.", false));
         newAccount.setLastName(Validation.scanForNumbers("Your last name can't contain any digit number or empty spaces.", false));
-        newAccount.setCellNumber(Validation.checkRegex("Your phone number can't contain any type of characters, but numbers.", "[0-9]+", true));
+        newAccount.getCredentials().setCellNumber(Validation.checkRegex("Your phone number can't contain any type of characters, but numbers.", "[0-9]+", true));
 
         System.out.println("The following information can be modified in a future.");
         System.out.println("1. Username");
@@ -70,13 +64,12 @@ public class MainMenu {
         System.out.println("3. Confirm password");
         System.out.println("4. Email");
 
-        newAccount.getCredentials().setUsername(Validation.checkForStringLength("Your username must contain at least 4 characters and not more than 16.",4, 16));
-        newAccount.getCredentials().setPassword(Validation.checkTwice("Your password doesn't match",Validation.checkForStringLength("Your password must contain at least 4 characters", 4, 100)));
-        newAccount.getCredentials().setEmail(Validation.checkRegex("You must insert a valid email","^(.+)@(.+)$", false));
+        newAccount.getCredentials().setUsername(Validation.checkForStringLength("Your username must contain at least 4 characters, and must be available.", 4, 100, "username"));
+        newAccount.getCredentials().setPassword(Validation.checkTwice("Your password doesn't match", Validation.checkForStringLength("Your password must contain at least 4 characters", 4, 100, "")));
+        newAccount.getCredentials().setEmail(Validation.checkRegex("You must insert a valid email", "^(.+)@(.+)$", false));
 
-        System.out.println(newAccount.getFirstName() + " " + newAccount.getLastName() + ". " + (newAccount.isVerified()? "Verified" : ""));
-        if(!Validation.confirm())
-        {
+        System.out.println(newAccount.getFirstName() + " " + newAccount.getLastName() + ". " + (newAccount.isVerified() ? "Verified" : ""));
+        if (!Validation.confirm()) {
             Account.removeAccount(newAccount);
             ExecuteSignUpMenu();
             return;
@@ -85,28 +78,27 @@ public class MainMenu {
         Start();
     }
 
-    public static void Start()
-    {
+    public static void Start() {
         Formatting.clear();
         Formatting.drawHorizontalLine();
         System.out.println("Shopify!");
-        if(loggedAccount == null) { ExecuteLogInMenu(""); }
+        if (loggedAccount == null) {
+            ExecuteLogInMenu("");
+        }
         System.out.println(loggedAccount.getFirstName() + ", what can we do for you today?");
         Formatting.drawHorizontalLine();
         ExecuteMainMenu();
 
     }
 
-    public static void ExecuteMainMenu()
-    {
-        //TODO: Case 0, 1, 2, 4
-        switch (ExecuteMenu(new String[] {
+    public static void ExecuteMainMenu() {
+        //TODO: Case 0, 1, 2
+        switch (ExecuteMenu(new String[]{
                 "List me all products",
                 "Search for a product",
                 "Publish a product",
-                "My profile (" + loggedAccount.getUsername() + ")",
-                "Log off"}))
-        {
+                "My profile (" + loggedAccount.getCredentials().getUsername() + ")",
+                "Log off"})) {
             case 2: //Publish a product
                 ExecutePublisherMenu();
                 break;
@@ -114,18 +106,19 @@ public class MainMenu {
                 DisplayAccount(loggedAccount);
                 ExecuteMainMenu();
                 break;
+            case 4: //Log off
+                ExecuteLogInMenu("You've logged off! See u soon!");
+                ExecuteMainMenu();
+                break;
         }
     }
 
-    public static void ExecutePublisherMenu()
-    {
+    public static void ExecutePublisherMenu() {
         int page = 0;
         int amount = 8;
         int selectedProduct = -1;
-        do
-        {
-            switch(ExecuteMenu(ConvertingTool.categoriesToString(page, amount )))
-            {
+        do {
+            switch (ExecuteMenu(ConvertingTool.categoriesToString(page, amount))) {
                 case 1:
                     page--;
                     break;
@@ -155,43 +148,39 @@ public class MainMenu {
                 case 0:
                     page++;
                     break;
-                    default:
-                        selectedProduct = -1;
-                        break;
+                default:
+                    selectedProduct = -1;
+                    break;
             }
-        } while((selectedProduct < 0 || selectedProduct > 9) || !Publication.exists(selectedProduct * page));
+        } while ((selectedProduct < 0 || selectedProduct > 9) || !Publication.exists(selectedProduct * page));
         //TODO: Display publication by ID
         //DisplayPublication(Publication.searchById(selectedProduct * page));
     }
 
-    public static void DisplayPublication(Publication publication)
-    {
+    public static void DisplayPublication(Publication publication) {
 
     }
 
-    public static void DisplayAccount(Account account)
-    {
+    public static void DisplayAccount(Account account) {
         Formatting.drawHorizontalLine();
-        System.out.println(account.getUsername());
+        System.out.println(account.getCredentials().getUsername());
         System.out.println(account.getFirstName() + " " + account.getLastName());
         System.out.println("(" + (account.isVerified() ? "Verified" : "Not verified") + ")");
-        System.out.println(account.transitionsAmount() > 5 ? "Trusthworthy" : "Newer");
+        System.out.println(account instanceof AdministratorAccount ? "admin" : (account.transitionsAmount() > 5 ? "Trusthworthy" : "Newer"));
         System.out.println("E-mail: " + account.getCredentials().getEmail());
-        System.out.println("Cell number: " + account.getCellNumber());
+        System.out.println("Cell number: " + account.getCredentials().getCellNumber());
         System.out.println("ID: " + account.getId());
         Formatting.drawHorizontalLine();
         Formatting.pause();
     }
 
-    public static int ExecuteMenu(String[] options)
-    {
+    public static int ExecuteMenu(String[] options) {
         Scanner scanner = new Scanner(System.in);
         int opt = -1;
 
         do {
             System.out.println("Choose an option:");
-            for(int i = 0; i < options.length; i++)
-            {
+            for (int i = 0; i < options.length; i++) {
                 System.out.println(i + ". " + options[i]);
             }
             opt = scanner.nextInt();

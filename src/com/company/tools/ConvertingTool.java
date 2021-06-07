@@ -7,11 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ConvertingTool {
-    public static String[] categoriesToString(int page, int amount)
-    {
+    public static String[] categoriesToString(int page, int amount) {
         List<String> categories = new ArrayList<>();
-        for(int i = page; i < page + amount; i++)
-        {
+        for (int i = page; i < page + amount; i++) {
             categories.add(Category.values()[i].toString());
         }
 

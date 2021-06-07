@@ -17,7 +17,7 @@ public class Publication {
     private LocalDate creationDate;
 
     private static int publicationCount = 0;
-    private static HashMap<Integer, Publication> allPublications = new HashMap<Integer, Publication>();
+    private static final HashMap<Integer, Publication> allPublications = new HashMap<Integer, Publication>();
 
     public Publication(String title, String description, int availableAmount, Account seller, double cost, Category[] categories) {
         id = publicationCount;
@@ -34,21 +34,18 @@ public class Publication {
     }
 
     //TODO: Test this code, extreme low possibilites of working correctly.
-    public Publication[] searchForPublication(String searchingValue)
-    {
+    public Publication[] searchForPublication(String searchingValue) {
         return allPublications.values().stream()
                 .filter(publication ->
                         publication.getTitle().contains(searchingValue) ||
-                        publication.getCategoriesStringified().contains(searchingValue)).toArray(Publication[]::new);
+                                publication.getCategoriesStringified().contains(searchingValue)).toArray(Publication[]::new);
     }
 
-    public int getAvailableAmount()
-    {
+    public int getAvailableAmount() {
         return availableAmount;
     }
 
-    public void setAvailableAmount(int value)
-    {
+    public void setAvailableAmount(int value) {
         availableAmount = value;
     }
 
@@ -65,7 +62,7 @@ public class Publication {
     }
 
     public void setCost(double cost) {
-        if(cost <= 0) cost *= -1;
+        if (cost <= 0) cost *= -1;
         this.cost = cost;
     }
 
@@ -97,11 +94,9 @@ public class Publication {
         return categories;
     }
 
-    public String getCategoriesStringified()
-    {
+    public String getCategoriesStringified() {
         String string = "";
-        for (Category category : categories)
-        {
+        for (Category category : categories) {
             string += "-" + category.toString() + "-";
         }
 
@@ -125,8 +120,7 @@ public class Publication {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getTitle() + ". ";
     }
 }
