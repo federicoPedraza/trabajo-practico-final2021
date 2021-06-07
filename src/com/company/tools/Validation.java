@@ -6,23 +6,23 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Validation {
-    public static String scanForNumbers(String errorMessage, boolean skippeable) {
+    public static int seekNumber(String errorMessage, boolean skippeable)
+    {
         Scanner scanner = new Scanner(System.in);
-        String lastScan = scanner.next();
-
-        if (lastScan.equals("-") && skippeable) {
-            return lastScan;
+        int convertion = 0;
+        while(true)
+        {
+            try {
+                convertion = Integer.parseInt(scanner.next());
+                break;
+            } catch(NumberFormatException nfe) {
+                System.out.println(errorMessage);
+            }
         }
 
-        while (lastScan.matches(".*\\d.*") || lastScan.isEmpty() || lastScan == null) {
-            System.out.println(errorMessage);
-            lastScan = scanner.next();
-        }
-
-        return lastScan;
+        return convertion;
     }
 
-    //TODO: Replace everything with checkRedex
     public static String checkRegex(String errorMessage, String pattern, boolean skippeable) {
         Pattern regex = Pattern.compile(pattern);
         Scanner scanner = new Scanner(System.in);
@@ -76,54 +76,13 @@ public class Validation {
         return lastScan;
     }
 
-    public static String scanForEmail(String errorMessage, boolean skippeable) {
+    public static boolean confirm(String message)
+    {
         Scanner scanner = new Scanner(System.in);
-        String lastScan = scanner.next();
+        System.out.println(message);
+        System.out.println("Type 'confirm' to continue");
+        String opt = scanner.next();
 
-        if (lastScan.equals("-") && skippeable) {
-            return lastScan;
-        }
-
-        boolean isEmail = false;
-
-        while (!isEmail) {
-            if (lastScan.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-                isEmail = true;
-            } else {
-                System.out.println(errorMessage);
-                lastScan = scanner.next();
-            }
-        }
-
-        return lastScan;
-    }
-
-    public static String scanForCharacters(String errorMessage, boolean skippeable) {
-        Scanner scanner = new Scanner(System.in);
-        String lastScan = scanner.next();
-
-        if (lastScan.equals("-") && skippeable) {
-            return lastScan;
-        }
-
-        boolean containsCharacter = true;
-
-        while (containsCharacter) {
-            try {
-                Integer.parseInt(lastScan);
-                containsCharacter = false;
-            } catch (NumberFormatException e) {
-                containsCharacter = true;
-                System.out.println(errorMessage);
-                lastScan = scanner.next();
-            }
-        }
-
-        return lastScan;
-    }
-
-    //TODO: Finish-up confirm validation
-    public static boolean confirm() {
-        return true;
+        return opt.equals("confirm");
     }
 }

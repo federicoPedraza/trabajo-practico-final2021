@@ -1,7 +1,7 @@
 package com.company;
 
 import com.company.databaseTesting.TestingDatabase;
-import com.company.displaying.MainMenu;
+import com.company.displaying.MenuDisplay;
 
 public class Main {
     /*
@@ -10,6 +10,6 @@ public class Main {
      */
     public static void main(String[] args) {
         TestingDatabase.Initializate();
-        MainMenu.Start();
+        MenuDisplay.Start();
     }
 }
