@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2b31e60-1df9-45e4-a676-8fb8d225b529" name="Default Changelist" comment="Fixed lots of bugs.&#10;'MainMenu' renamed to 'MenuDisplay' since it had other propouses before.&#10;Added 'confirm' validation&#10;Added tons of comments at MenuDisplay&#10;ADDED TODO: &#10;Implement account editing.">
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/Preferences.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/models/accounts/PlusAccount.java" afterDir="false" />
+    <list default="true" id="c2b31e60-1df9-45e4-a676-8fb8d225b529" name="Default Changelist" comment="Added display publication (almost fully functional, read todo below),&#10;Added comments and subcomments,&#10;Partially finished ExecutePublicationMenu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/databaseTesting/TestingDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/databaseTesting/TestingDatabase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/displaying/MainMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Account.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Publication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Publication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Formatting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Formatting.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Validation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Validation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/databaseTesting/TestingDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/databaseTesting/TestingDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/displaying/MenuDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MenuDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/models/Publication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Publication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/tools/Formatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/tools/Formatting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/tools/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/tools/Validation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623089387351</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added display publication (almost fully functional, read todo below),&#10;Added comments and subcomments,&#10;Partially finished ExecutePublicationMenu">
+      <created>1623186376602</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1623186376602</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -240,7 +230,8 @@
     <MESSAGE value="Finished sign-up&#10;Updated validation methods" />
     <MESSAGE value="Implemented log off.&#10;Tried to rework the code.&#10;CellNumber is now considered a credential." />
     <MESSAGE value="Fixed lots of bugs.&#10;'MainMenu' renamed to 'MenuDisplay' since it had other propouses before.&#10;Added 'confirm' validation&#10;Added tons of comments at MenuDisplay&#10;ADDED TODO: &#10;Implement account editing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed lots of bugs.&#10;'MainMenu' renamed to 'MenuDisplay' since it had other propouses before.&#10;Added 'confirm' validation&#10;Added tons of comments at MenuDisplay&#10;ADDED TODO: &#10;Implement account editing." />
+    <MESSAGE value="Added display publication (almost fully functional, read todo below),&#10;Added comments and subcomments,&#10;Partially finished ExecutePublicationMenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added display publication (almost fully functional, read todo below),&#10;Added comments and subcomments,&#10;Partially finished ExecutePublicationMenu" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
