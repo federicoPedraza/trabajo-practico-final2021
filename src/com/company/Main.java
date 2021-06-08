@@ -1,7 +1,6 @@
 package com.company;
 
 import com.company.databaseTesting.TestingDatabase;
-import com.company.displaying.MenuDisplay;
 
 public class Main {
     /*

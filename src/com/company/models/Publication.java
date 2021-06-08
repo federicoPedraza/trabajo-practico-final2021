@@ -4,6 +4,7 @@ import com.company.models.categories.Category;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Publication {
     private int id = 0;
@@ -15,9 +16,10 @@ public class Publication {
     private int seenTimes = 0;
     private Category[] categories;
     private LocalDate creationDate;
+    public Stack<Comment> comments;
 
-    private static int publicationCount = 0;
-    private static final HashMap<Integer, Publication> allPublications = new HashMap<Integer, Publication>();
+    public static int publicationCount = 0;
+    public static HashMap<Integer, Publication> allPublications = new HashMap<Integer, Publication>();
 
     public Publication(String title, String description, int availableAmount, Account seller, double cost, Category[] categories) {
         id = publicationCount;
@@ -31,6 +33,7 @@ public class Publication {
         seenTimes = 0;
         creationDate = LocalDate.now();
         allPublications.put(id, this);
+        comments = new Stack<Comment>();
     }
 
     //TODO: Test this code, extreme low possibilites of working correctly.
@@ -121,6 +124,8 @@ public class Publication {
 
     @Override
     public String toString() {
-        return getTitle() + ". ";
+        return getTitle() + ": \n" +
+                ">> '" + getDescription().substring(0, Math.min(getDescription().length(), 32)) + " ... \n" +
+                "|$" + getCost() + "|";
     }
 }

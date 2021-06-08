@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//TODO: Implement account editing.
 public abstract class Account {
     public static int accountCount = 0;
     public static HashMap<Integer, Account> allAccounts = new HashMap<>();
@@ -14,6 +15,7 @@ public abstract class Account {
     private String firstName;
     private String lastName;
     private Credentials credentials;
+    private Preferences preferences;
 
     private Cart cart;
     private final List<Receipt> receipts = new ArrayList<>();
@@ -21,6 +23,7 @@ public abstract class Account {
     //region Constructors
     public Account() {
         credentials = new Credentials("", "", "", "");
+        preferences = new Preferences();
         accountCount++;
         setId();
         receipts.clear();
@@ -31,6 +34,7 @@ public abstract class Account {
         setFirstName(firstName);
         setLastName(lastName);
         credentials = new Credentials(username, password, email, cellNumber);
+        preferences = new Preferences();
 
         accountCount++;
         setId();
@@ -56,6 +60,10 @@ public abstract class Account {
         lastName = value;
     }
 
+    public Preferences getPreferences()
+    {
+        return preferences;
+    }
 
     public void setId() {
         this.id = this.hashCode();

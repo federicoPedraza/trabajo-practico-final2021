@@ -76,13 +76,12 @@ public class Validation {
         return lastScan;
     }
 
-    public static boolean confirm(String message)
+    public static boolean confirm(String message, String expected)
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
-        System.out.println("Type 'confirm' to continue");
         String opt = scanner.next();
 
-        return opt.equals("confirm");
+        return opt.equals(expected);
     }
 }

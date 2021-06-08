@@ -22,4 +22,14 @@ public class Formatting {
 
         }
     }
+
+    public static void space() {
+        System.out.println("\n");
+    }
+
+    public static void displayPlusAccountWarn()
+    {
+        System.out.println("You must upgrade your account to a Plus Member. To do that, \n" +
+                "go to your profile and select Plus membrecy");
+    }
 }

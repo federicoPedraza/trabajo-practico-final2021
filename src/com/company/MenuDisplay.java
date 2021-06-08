@@ -1,13 +1,18 @@
-package com.company.displaying;
+package com.company;
 
 import com.company.models.Account;
+import com.company.models.Comment;
+import com.company.models.Preferences;
 import com.company.models.Publication;
 import com.company.models.accounts.AdministratorAccount;
 import com.company.models.accounts.NormalAccount;
+import com.company.models.accounts.PlusAccount;
+import com.company.models.categories.Category;
 import com.company.tools.ConvertingTool;
 import com.company.tools.Formatting;
 import com.company.tools.Validation;
 
+import java.text.Format;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -90,7 +95,7 @@ public class MenuDisplay {
 
         System.out.println(newAccount.getFirstName() + " " + newAccount.getLastName() + ". " + (newAccount.isVerified() ? "Verified" : ""));
         //interruption
-        if (!Validation.confirm("Do you want to confirm?")) {
+        if (Validation.confirm("Do you confirm these changes? Type 'no' to go back", "no")) {
             Account.removeAccount(newAccount);
             System.out.println("You will be re-directed to the main menu");
             Formatting.pause();
@@ -129,20 +134,26 @@ public class MenuDisplay {
                 "Search for a product",
                 "Publish a product" + (loggedAccount == null ? " (Must log in)" : ""),
                 (loggedAccount != null) ? "My profile (" + loggedAccount.getCredentials().getUsername() + ")" : "Log in",
-                (loggedAccount != null ? "Log off" : "")})) {
-            case 2: //Publish a product or Log In
-                if(loggedAccount == null) { ExecuteLogInMenu("You must log in to unlock this feature"); ExecuteMainMenu(); } else
-                ExecutePublisherMenu();
+                (loggedAccount != null ? "Log off" : "")}, 1)) {
+            case 1: //List me all products
+                ExecutePublisherMenu("", 0,(loggedAccount == null ? 8 : loggedAccount.getPreferences().amountOfPublicationsPerPage));
                 ExecuteMainMenu();
                 break;
-            case 3: //My profile or Log In
+            case 2: //Search for a product
+                break;
+
+            case 3: //Publish a product or Log In
+                if(loggedAccount == null) { ExecuteLogInMenu("You must log in to unlock this feature"); }
+                ExecuteMainMenu();
+                break;
+            case 4: //My profile or Log In
                 if(loggedAccount == null) { ExecuteLogInMenu(""); ExecuteMainMenu(); } else
                 {
                     DisplayAccount(loggedAccount);
                     ExecuteMainMenu();
                 }
                 break;
-            case 4: //Log off
+            case 5: //Log off
                 ExecuteLogInMenu("You've logged off! See u soon!");
                 ExecuteMainMenu();
                 break;
@@ -154,52 +165,120 @@ public class MenuDisplay {
         }
     }
 
-    public static void ExecutePublisherMenu() {
-        int page = 0;
-        int amount = 8;
-        int selectedProduct = -1;
-        do {
-            switch (ExecuteMenu(ConvertingTool.categoriesToString(page, amount))) {
-                case 1:
-                    page--;
-                    break;
-                case 2:
-                    selectedProduct = 2;
-                    break;
-                case 3:
-                    selectedProduct = 3;
-                    break;
-                case 4:
-                    selectedProduct = 4;
-                    break;
-                case 5:
-                    selectedProduct = 5;
-                    break;
-                case 6:
-                    selectedProduct = 6;
-                    break;
-                case 7:
-                    selectedProduct = 7;
-                    break;
-                case 8:
-                    selectedProduct = 8;
-                    break;
-                case 9:
-                    selectedProduct = 9;
-                case 0:
-                    page++;
-                    break;
-                default:
-                    selectedProduct = -1;
-                    break;
+    /**Executes a search and display for all publications that matches the filterBy string
+     * , depending on the page and the amounts of publications you want
+     * to display.**/
+    public static void ExecutePublisherMenu(String filterBy, int page, int amountPerPage)
+    {
+        System.out.println("Page: " + page);
+        System.out.println("0. Next page");
+        System.out.println("1. Back page");
+        System.out.println("2. Main Menu");
+        var publications = Publication.allPublications.values().iterator();
+        int counter = 3;
+        while(publications.hasNext() && counter != amountPerPage)
+        {
+            if(loggedAccount != null)
+            {
+                if(!loggedAccount.getPreferences().compactBrowsing)
+                    System.out.println(counter + ": " + publications.next().toString());
+                else
+                    System.out.println(counter + ": " + publications.next().getTitle());
             }
-        } while ((selectedProduct < 0 || selectedProduct > 9) || !Publication.exists(selectedProduct * page));
-        //TODO: Display publication by ID
-        //DisplayPublication(Publication.searchById(selectedProduct * page));
+            else
+                System.out.println(counter + ": " + publications.next().toString());
+            counter++;
+        }
+
+        int opt = -1;
+        do {
+            opt = Validation.seekNumber("You must choose a valid option",false);
+            switch(opt)
+            {
+                case 0:
+                    ExecutePublisherMenu(filterBy, (page + 1), amountPerPage);
+                case 1:
+                    ExecutePublisherMenu(filterBy, (page == 0 ? page : page - 1), amountPerPage);
+                case 2:
+                    ExecuteMainMenu();
+                default:
+                    DisplayPublication(Publication.allPublications.get(opt - 3));
+            }
+        } while (opt < page * amountPerPage || opt > page * amountPerPage + amountPerPage + 3);
+        Formatting.pause();
+        ExecutePublisherMenu(filterBy, page, amountPerPage);
     }
 
-    public static void DisplayPublication(Publication publication) {
+    //TODO: Implement get publications by category
+    public static void ExecutePublisherMenu(Category[] categories) {
 
+    }
+
+    //TODO: Fix cart adding multiple items, fix 0 comments not displaying any warning, fix extra information not available, fix go back sends you all the way back.
+    //TODO: Make the stock responsive, add option to comment.
+    public static void DisplayPublication(Publication publication) {
+        Formatting.drawHorizontalLine();
+        System.out.println(publication.getTitle());
+        System.out.println("$" + publication.getCost());
+        System.out.println(publication.getDescription());
+        System.out.println("Stock: " + publication.getAvailableAmount());
+
+        switch(ExecuteMenu(new String[] {
+                (loggedAccount == null ? "Extra information (plus members only)" : "Extra information"),
+                (loggedAccount == null ? "Add to cart (must log in)" : "Add to cart (" + loggedAccount.getCart().getAllProducts().length() + " items)"),
+                "See comments (" + publication.comments.size() + ")",
+                "Go back"
+        }, 1))
+        {
+            case 0:
+                if(loggedAccount instanceof PlusAccount)
+                {
+                    DisplayPublicationMoreInformation(publication);
+                }
+                else
+                {
+                    Formatting.displayPlusAccountWarn();
+
+                }
+                Formatting.pause();
+                DisplayPublication(publication);
+                break;
+            case 1:
+                if(loggedAccount == null)
+                {
+                    ExecuteLogInMenu("You must log in to add this item to your cart");
+                }
+                loggedAccount.getCart().add(publication);
+                System.out.println("Thanks for adding this item to your cart!");
+                Formatting.pause();
+                DisplayPublication(publication);
+                break;
+            case 2:
+                DisplayComments(publication);
+                Formatting.pause();
+                DisplayPublication(publication);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void DisplayComments(Publication publication)
+    {
+        if(publication.comments.size() == 0) { System.out.println("This publication has no comments!"); return; };
+
+        for(int i = 0; i < publication.comments.size(); i++)
+        {
+            System.out.println(i + ". (" + publication.comments.get(i).commentator.getCredentials().getUsername() + ")" + publication.comments.get(i).body
+            + ((publication.comments.get(i).subComments.size() > 0) ? " | +" + publication.comments.get(i).subComments.size() + " comments" : " | "));
+        }
+    }
+
+    public static void DisplayPublicationMoreInformation(Publication publication)
+    {
+        System.out.println(publication.getSeller().toString());
+        System.out.println();
+        Formatting.pause();
     }
 
     public static void DisplayAccount(Account account) {
@@ -212,13 +291,21 @@ public class MenuDisplay {
         System.out.println("Cell number: " + account.getCredentials().getCellNumber());
         System.out.println("ID: " + account.getId());
         Formatting.drawHorizontalLine();
-        Formatting.pause();
+        if(loggedAccount == account)
+        {
+            System.out.println("Type modify");
+        }
+
+        if(Validation.confirm("Type 'modify' to edit your profile or preferences.", "modify"))
+        {
+            //TODO: ExecuteAccountModifierMenu();
+        }
     }
 
     /**This is an interactive menu made of options given by code.
      * The user gets a list of options (String[]) and it returns the value given by the user.
      * The menu won't count empty options as values, and won't let the user **/
-    public static int ExecuteMenu(String[] options) {
+    public static int ExecuteMenu(String[] options, int indexOffset) {
         Scanner scanner = new Scanner(System.in);
         int opt = -1;
         int invalidOptions = Arrays.stream(options).filter(s -> !s.isEmpty() && !s.isBlank()).toArray().length;
@@ -226,12 +313,12 @@ public class MenuDisplay {
         options = Arrays.copyOf(Arrays.stream(options).filter(s -> !s.isEmpty() && !s.isBlank()).toArray(), invalidOptions, String[].class);
         do {
             System.out.println("Choose an option:");
-            for (int i = 0; i < options.length; i++) {
+            for (int i = indexOffset; i <= options.length; i++) {
 
-                System.out.println(i + ". " + options[i]);
+                System.out.println(i + ". " + options[i - indexOffset]);
             }
             opt = Validation.seekNumber("You must choose a valid option",false);
-        } while (opt < 0 || opt > options.length);
+        } while (opt < indexOffset || opt > options.length + indexOffset);
 
         return opt;
     }

@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2b31e60-1df9-45e4-a676-8fb8d225b529" name="Default Changelist" comment="Implemented log off.&#10;Tried to rework the code.&#10;CellNumber is now considered a credential.">
+    <list default="true" id="c2b31e60-1df9-45e4-a676-8fb8d225b529" name="Default Changelist" comment="Fixed lots of bugs.&#10;'MainMenu' renamed to 'MenuDisplay' since it had other propouses before.&#10;Added 'confirm' validation&#10;Added tons of comments at MenuDisplay&#10;ADDED TODO: &#10;Implement account editing.">
+      <change afterPath="$PROJECT_DIR$/src/com/company/models/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/models/Preferences.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/models/accounts/PlusAccount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/displaying/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/displaying/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/databaseTesting/TestingDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/databaseTesting/TestingDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/displaying/MainMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Publication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Publication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Formatting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Formatting.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Validation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Validation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/displaying/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/displaying/MenuDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/databaseTesting/TestingDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/databaseTesting/TestingDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/displaying/MenuDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MenuDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/models/Publication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Publication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/tools/Formatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/tools/Formatting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/tools/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/tools/Validation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +35,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -103,12 +119,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="true" />
+    <property name="Repository.Attach.JavaDocs" value="true" />
+    <property name="Repository.Attach.Sources" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/company/models" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -179,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623029911472</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed lots of bugs.&#10;'MainMenu' renamed to 'MenuDisplay' since it had other propouses before.&#10;Added 'confirm' validation&#10;Added tons of comments at MenuDisplay&#10;ADDED TODO: &#10;Implement account editing.">
+      <created>1623089387351</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1623089387351</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -193,7 +221,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="Publications" />
                       </list>
                     </value>
                   </entry>
@@ -211,7 +239,8 @@
     <MESSAGE value="Added most of the models.&#10;Added main menu (just display), and logging into the system (required for the mainMenu). &#10;Can't sign-up already, but working in progress." />
     <MESSAGE value="Finished sign-up&#10;Updated validation methods" />
     <MESSAGE value="Implemented log off.&#10;Tried to rework the code.&#10;CellNumber is now considered a credential." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented log off.&#10;Tried to rework the code.&#10;CellNumber is now considered a credential." />
+    <MESSAGE value="Fixed lots of bugs.&#10;'MainMenu' renamed to 'MenuDisplay' since it had other propouses before.&#10;Added 'confirm' validation&#10;Added tons of comments at MenuDisplay&#10;ADDED TODO: &#10;Implement account editing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed lots of bugs.&#10;'MainMenu' renamed to 'MenuDisplay' since it had other propouses before.&#10;Added 'confirm' validation&#10;Added tons of comments at MenuDisplay&#10;ADDED TODO: &#10;Implement account editing." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
