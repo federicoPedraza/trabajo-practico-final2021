@@ -115,6 +115,8 @@ public abstract class Account {
     public static boolean checkOneCredential(String input, String type) {
         for (Account account : allAccounts.values()) {
             switch (type) {
+                case "password":
+                    return account.getCredentials().getPassword().equals(input);
                 case "username":
                     return account.getCredentials().getUsername().equals(input);
                 case "email":
@@ -122,6 +124,7 @@ public abstract class Account {
                 case "cellnumber":
                     return account.getCredentials().getCellNumber().equals(input);
                 default:
+                    System.out.println("ERROR: NOT FOUND '" + type + "' HAS A TYPE OF CREDENTIAL");
                     return false;
             }
         }
@@ -145,8 +148,7 @@ public abstract class Account {
         if (credentials == null) {
             return false;
         }
-
-        return credentials.getCellNumber() != null || credentials.getCellNumber() != "";
+        return credentials.getCellNumber() != null && credentials.getCellNumber() != "-";
     }
 
     public int transitionsAmount() {

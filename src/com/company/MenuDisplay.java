@@ -1,9 +1,6 @@
 package com.company;
 
-import com.company.models.Account;
-import com.company.models.Comment;
-import com.company.models.Preferences;
-import com.company.models.Publication;
+import com.company.models.*;
 import com.company.models.accounts.AdministratorAccount;
 import com.company.models.accounts.NormalAccount;
 import com.company.models.accounts.PlusAccount;
@@ -88,9 +85,11 @@ public class MenuDisplay {
         System.out.println("2. Password");
         System.out.println("3. Confirm password");
         System.out.println("4. Email");
-
+        System.out.println("Username:");
         newAccount.getCredentials().setUsername(Validation.checkForStringLength("Your username must contain at least 4 characters, and must be available.", 4, 100, "username"));
-        newAccount.getCredentials().setPassword(Validation.checkTwice("Your password doesn't match", Validation.checkForStringLength("Your password must contain at least 4 characters", 4, 100, "")));
+        System.out.println("Password and confirmation:");
+        newAccount.getCredentials().setPassword(Validation.checkTwiceIn("Your password doesn't match", Validation.checkForStringLength("Your password must contain at least 4 characters", 4, 100, ""), true));
+        System.out.println("Email:");
         newAccount.getCredentials().setEmail(Validation.checkRegex("You must insert a valid email", "^(.+)@(.+)$", false));
 
         System.out.println(newAccount.getFirstName() + " " + newAccount.getLastName() + ". " + (newAccount.isVerified() ? "Verified" : ""));
@@ -161,7 +160,6 @@ public class MenuDisplay {
                     System.out.println("You must enter a valid option.");
                     ExecuteMainMenu();
                     break;
-
         }
     }
 
@@ -174,6 +172,7 @@ public class MenuDisplay {
         System.out.println("0. Next page");
         System.out.println("1. Back page");
         System.out.println("2. Main Menu");
+        Formatting.drawHorizontalLine();
         var publications = Publication.allPublications.values().iterator();
         int counter = 3;
         while(publications.hasNext() && counter != amountPerPage)
@@ -291,14 +290,76 @@ public class MenuDisplay {
         System.out.println("Cell number: " + account.getCredentials().getCellNumber());
         System.out.println("ID: " + account.getId());
         Formatting.drawHorizontalLine();
-        if(loggedAccount == account)
-        {
-            System.out.println("Type modify");
-        }
 
-        if(Validation.confirm("Type 'modify' to edit your profile or preferences.", "modify"))
+        if(loggedAccount.getId() == account.getId())
         {
-            //TODO: ExecuteAccountModifierMenu();
+            if(Validation.confirm("Type 'modify' to edit your profile or preferences.", "modify"))
+            {
+                ExecuteModifyAccountMenu("");
+                ExecuteMainMenu();
+            }
+        }
+        Formatting.pause();
+        ExecuteMainMenu();
+    }
+
+    public static void ExecuteModifyAccountMenu(String message)
+    {
+        if(loggedAccount == null) return;
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        switch(ExecuteMenu(new String[] {
+                "Change your username (" + loggedAccount.getCredentials().getUsername() + ")",
+                "Change your password",
+                "Change your cell number (" + loggedAccount.getCredentials().getCellNumber() + ")",
+                "Compact browsing: " + (loggedAccount.getPreferences().compactBrowsing ? "Yes" : "No"),
+                "Amount of publications per page: " + loggedAccount.getPreferences().amountOfPublicationsPerPage,
+                "Delete account"
+        }, 1))
+        {
+            case 1:
+                System.out.println("Enter your new username: ");
+                loggedAccount.getCredentials().setUsername(Validation.checkForStringLength("Your username must contain at least 4 characters, and must be available.", 4, 100, "username"));
+                ExecuteModifyAccountMenu("Your username has been changed!");
+                break;
+            case 2:
+                System.out.println("Enter your actual password (type '-' to exit): ");
+                String lastScan = scanner.next();
+                if(lastScan.equals("-")) { ExecuteModifyAccountMenu(""); }
+                while(!Account.checkOneCredential(lastScan, "password"))
+                {
+                    System.out.println("Your password doesn't match (type '-' to exit)");
+                    lastScan = scanner.next();
+                    if(lastScan.equals("-")) { ExecuteModifyAccountMenu(""); }
+                }
+                System.out.println("Enter your new password (twice)");
+                loggedAccount.getCredentials().setPassword(Validation.checkTwiceIn("Your password doesn't match", Validation.checkForStringLength("Your password must contain at least 4 characters", 4, 100, ""), true));
+                ExecuteModifyAccountMenu("Your password has been changed!");
+                break;
+            case 3:
+                System.out.println("Enter your new cell number, or type '-' to remove it (" + loggedAccount.getCredentials().getCellNumber() + ")");
+                loggedAccount.getCredentials().setCellNumber(Validation.checkRegex("Your phone number can't contain any type of characters, but numbers.", "[0-9]+", true));
+                ExecuteModifyAccountMenu("Your cellphone has been changed!");
+                break;
+            case 4:
+                loggedAccount.getPreferences().compactBrowsing = !loggedAccount.getPreferences().compactBrowsing;
+                ExecuteModifyAccountMenu("");
+                break;
+            case 5:
+                loggedAccount.getPreferences().amountOfPublicationsPerPage *= 2;
+                if(loggedAccount.getPreferences().amountOfPublicationsPerPage > AmountOfPublicationPerPageOptions.VERYLARGE.getCapacity())
+                {
+                    loggedAccount.getPreferences().amountOfPublicationsPerPage = 4;
+                }
+                ExecuteModifyAccountMenu("");
+                break;
+            case 6:
+                //TODO: Delete account modification
+                ExecuteModifyAccountMenu("This feature is been worked");
+                break;
+            default:
+                DisplayAccount(loggedAccount);
+                break;
         }
     }
 

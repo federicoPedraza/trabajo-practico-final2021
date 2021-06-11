@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2b31e60-1df9-45e4-a676-8fb8d225b529" name="Default Changelist" comment="Added display publication (almost fully functional, read todo below),&#10;Added comments and subcomments,&#10;Partially finished ExecutePublicationMenu">
+      <change afterPath="$PROJECT_DIR$/src/com/company/models/AmountOfPublicationPerPageOptions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/MenuDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/MenuDisplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/models/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Validation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/trabajo-practico-final2021/com/company/tools/Validation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/MenuDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MenuDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/models/Preferences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/models/Preferences.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/tools/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/tools/Validation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623186376602</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added display publication (almost fully functional, read todo below),&#10;Added comments and subcomments,&#10;Partially finished ExecutePublicationMenu">
+      <created>1623189049531</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1623189049531</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,7 +226,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Publications" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
